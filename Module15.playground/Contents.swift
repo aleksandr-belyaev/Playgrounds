@@ -47,7 +47,8 @@ do {
     print("500 Internal Server Error")
 }
 
-func equatableSingleType<T: AnyObject, E: AnyObject> (a: T, b: E) {
+//последние три задания сформуированы очень непонятно, прошу сделать поправку на это = )
+func isEqualPrint<T: AnyObject, E: AnyObject> (a: T, b: E) {
     if a === b {
         print("Yes")
     } else {
@@ -60,7 +61,7 @@ enum TypeErrors: Error {
     case different
 }
 
-func equatableDifTypes<T: AnyObject, E: AnyObject> (a: T, b: E) throws {
+func isEqualThrow<T: AnyObject, E: AnyObject> (a: T, b: E) throws {
     if a === b {
         throw TypeErrors.equals
     } else {
@@ -73,6 +74,13 @@ func isEqual<T, E> (first: T, second: E) -> Bool where T: AnyObject, T: Equatabl
         if first == second as! T {
             return true
         }
+    } else {
+        do {
+            return first == second as! T
+        } catch TypeErrors.different {
+            return false
+        }
     }
     return false
 }
+
